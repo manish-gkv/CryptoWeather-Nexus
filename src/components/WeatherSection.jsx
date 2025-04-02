@@ -3,10 +3,8 @@
 import { useState, useEffect } from 'react';
 
 import {openWeatherUrl, openWeatherIconUrl} from '../constants/urls.jsx';
-import {cities} from '../constants/city.jsx';
 
-export default function WeatherSection() {
-
+export default function WeatherSection({cities=[]}) {
     const [data, setData] = useState([]);
 
     const OPEN_WEATHER_API = process.env.NEXT_PUBLIC_OPENWEATHER_API;

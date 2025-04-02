@@ -6,7 +6,6 @@ import { formatNumber, calculate24hChange } from '../utils/crypto.jsx';
 import { coinCap_ws, coinGeckoUrl } from '../constants/urls.jsx';
 
 export default function CryptoSection() {
-
     const [prices, setPrices] = useState({});
     const [cryptos, setCryptos] = useState([]);
     const [usdToInr, setUsdToInr] = useState(83);

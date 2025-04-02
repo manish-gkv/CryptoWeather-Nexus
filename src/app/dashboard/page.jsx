@@ -3,6 +3,7 @@
 import WeatherSection from '../../components/WeatherSection.jsx';
 import CryptoSection from '../../components/CryptoSection.jsx';
 import NewsSection from '../../components/NewsSection.jsx';
+import {cities} from '../../constants/city.jsx';
 
 export default function Dashboard() {
     return (
@@ -14,7 +15,7 @@ export default function Dashboard() {
             </h2>
             </div>
         </div>
-        <WeatherSection />
+        <WeatherSection cities={cities}/>
         <div className={'mt-10'}>
         <div className={'grid'}>
             <div className="text-center">
