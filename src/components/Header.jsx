@@ -10,7 +10,8 @@ export default function Header() {
   const pathname = usePathname();
 
   const navLinks = [
-    { name: 'Weather', href: '/weather' },
+    { name: 'Dashboard', href: '/dashboard' },
+    { name: 'Weather', href: '/city' },
     { name: 'Crypto', href: '/crypto' },
     { name: 'News', href: '/news' },
   ];
@@ -38,7 +39,7 @@ export default function Header() {
         isHidden ? '-translate-y-[130%]' : ''
       } ${isMenuOpen ? 'rounded-t-xl' : 'rounded-xl'}`}
     >
-      <div className="text-lg font-semibold text-[#31513f]">CryptoWeather Nexus</div>
+      <div className="text-lg font-semibold text-primary-green">CryptoWeather Nexus</div>
 
       {/* Desktop Navigation */}
       <ul className="hidden items-center gap-12 md:flex">
@@ -46,9 +47,9 @@ export default function Header() {
           <li key={link.name}>
             <Link
               href={link.href}
-              className={`relative text-sm font-medium text-gray-700 transition-colors after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-[#31513f] after:transition-all after:duration-300 hover:text-[#31513f] hover:after:w-full ${
+              className={`relative text-sm font-medium text-gray-700 transition-colors after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary-green after:transition-all after:duration-300 hover:text-primary-green hover:after:w-full ${
                 pathname === link.href
-                  ? 'text-[#31513f] after:w-full'
+                  ? 'text-primary-green after:w-full'
                   : ''
               }`}
             >
@@ -61,7 +62,7 @@ export default function Header() {
       {/* Mobile Menu Button */}
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className="text-2xl text-[#31513f] md:hidden"
+        className="text-2xl text-primary-green md:hidden"
       >
         {isMenuOpen ? '×' : '☰'}
       </button>
@@ -73,8 +74,8 @@ export default function Header() {
             <li key={link.name}>
               <Link
                 href={link.href}
-                className={`block px-4 py-3 text-sm text-gray-700 transition-colors hover:bg-gray-100 hover:text-[#31513f] ${
-                  pathname === link.href ? 'bg-gray-100 text-[#31513f]' : ''
+                className={`block px-4 py-3 text-sm text-gray-700 transition-colors hover:bg-gray-100 hover:text-primary-green ${
+                  pathname === link.href ? 'bg-gray-100 text-primary-green' : ''
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
