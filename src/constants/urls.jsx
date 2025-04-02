@@ -4,7 +4,7 @@ const coinCap_ws = "wss://ws.coincap.io/prices";
 
 const coinGeckoUrl = "https://api.coingecko.com/api/v3/";
 
-const openWeatherUrl = "https://pro.openweathermap.org/data/2.5/forecast/hourly";
+const openWeatherUrl = "https://pro.openweathermap.org/data/2.5/forecast/";
 
 const openWeatherIconUrl = "https://openweathermap.org/img/wn/";
 

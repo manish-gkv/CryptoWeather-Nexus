@@ -1,11 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 import {openWeatherUrl, openWeatherIconUrl} from '../constants/urls.jsx';
 
 export default function WeatherSection({cities=[]}) {
     const [data, setData] = useState([]);
+    const router = useRouter();
 
     const OPEN_WEATHER_API = process.env.NEXT_PUBLIC_OPENWEATHER_API;
     
@@ -13,7 +15,7 @@ export default function WeatherSection({cities=[]}) {
       async function fetchData(){
         const weatherData = [];
         for(const city of cities){
-            const response = await fetch(openWeatherUrl+`?q=${city}&appid=${OPEN_WEATHER_API}&cnt=1&units=metric`);
+            const response = await fetch(openWeatherUrl+`hourly?q=${city}&appid=${OPEN_WEATHER_API}&cnt=1&units=metric`);
             const cityData = await response.json();
             //console.log(cityData)
             weatherData.push({
@@ -30,7 +32,11 @@ export default function WeatherSection({cities=[]}) {
       }
       fetchData();
     }, []);
-    
+
+    const handleCityClick = (city) => {
+        router.push(`/city/${city}`);
+    };
+
     return (
         <div >
       
@@ -38,7 +44,9 @@ export default function WeatherSection({cities=[]}) {
       {data.map((city, index) => (
         <div
           key={index}
-          className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
+          className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+          onClick={() => handleCityClick(city.name)}
+          role="button"
         >
           <div className="flex justify-between items-start mb-4">
             <div>
