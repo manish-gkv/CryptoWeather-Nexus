@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { formatNumber, calculate24hChange } from '../utils/crypto.jsx';
 import { coinCap_ws, coinGeckoUrl } from '../constants/urls.jsx';
@@ -9,6 +10,8 @@ export default function CryptoSection() {
     const [prices, setPrices] = useState({});
     const [cryptos, setCryptos] = useState([]);
     const [usdToInr, setUsdToInr] = useState(83);
+
+    const router = useRouter();
 
     useEffect(() => {
         const pricesWs = new WebSocket(coinCap_ws + '?assets=bitcoin,ethereum,solana');
@@ -56,6 +59,10 @@ export default function CryptoSection() {
         return () => pricesWs.close();
     }, []);
 
+    const handleCryptoClick = (crypto) => {
+        router.push(`/crypto/${crypto}`);
+    };
+
     return (
         <div className="space-y-8">
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -63,7 +70,9 @@ export default function CryptoSection() {
         const change = calculate24hChange(crypto.current_price, crypto.price_change_24h, crypto.id, usdToInr, prices);
          return (<div
           key={crypto.symbol}
-          className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
+          className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+          onClick={() => handleCryptoClick(crypto.id)}
+          role="button"
         >
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-4">

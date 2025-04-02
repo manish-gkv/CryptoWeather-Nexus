@@ -1,5 +1,8 @@
 'use client';
+
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
 import {newsData} from '../constants/urls.jsx';
 
 export default function NewsSection() {
@@ -7,6 +10,8 @@ export default function NewsSection() {
     const newsDataApi = process.env.NEXT_PUBLIC_NEWS_DATA_API;
 
     const [articles, setArticles] = useState([]);
+
+    const router = useRouter();
 
     const newsDataUri = newsData + newsDataApi + "&q=crypto&size=6";
 
@@ -32,7 +37,13 @@ export default function NewsSection() {
 
         fetchData();
 
+
+
     }, []);
+
+    const handleNewsClick = (articleId) => {
+        router.push(`/news/${articleId}`);
+    };
 
     return (
         <div className="space-y-8">
@@ -41,7 +52,9 @@ export default function NewsSection() {
         {articles.map((article) => (
           <article
           key={article.id}
-          className="bg-white rounded-xl overflow-hidden hover:shadow-xl transition-all duration-200 shadow-lg group"
+          className="bg-white rounded-xl overflow-hidden hover:shadow-xl transition-all duration-200 shadow-lg group cursor-pointer"
+          onClick={() => handleNewsClick(article.id)}
+          role="button"
         >
           <div className="h-48 bg-gray-100 overflow-hidden">
             <img
@@ -51,9 +64,9 @@ export default function NewsSection() {
             />
           </div>
           <div className="p-6">
-            <a href = {article.link}><h3 className="font-semibold mb-2 line-clamp-2 text-gray-800 group-hover:text-[#31513f] transition-colors">
+            <h3 className="font-semibold mb-2 line-clamp-2 text-gray-800 group-hover:text-[#31513f] transition-colors">
               {article.title}
-            </h3></a>
+            </h3>
             <p className="text-gray-600 text-sm line-clamp-3 mb-3">
               {article.excerpt}
             </p>
