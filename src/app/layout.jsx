@@ -1,5 +1,6 @@
 import './globals.css'
 import Header from '../components/Header.jsx';
+import { Analytics } from "@vercel/analytics/react"
 
 export default function DashboardLayout({ children }) {
   return (
